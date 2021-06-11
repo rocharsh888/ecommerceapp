@@ -1,0 +1,69 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ 	<style type="text/css">
+ 		input[type='number']{
+    width: 30px;
+}
+ 	</style>
+  </head>
+<body>
+
+	
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+		<h4>Cart Products </h4>
+			{% if carts %}
+			  <ul class="thumbnails">
+			  	{% for i in carts %}
+				<li class="span3">
+				  <div class="thumbnail">
+					<a  href="{% url 'user_product_detail' pk=i.product.pk %}"><img src="{{i.product.product_image.url}}" alt="" style="height:200px;width: 200px;" /></a>
+					<div class="caption">
+					  <h5>Product Name</h5>
+					  <p> 
+						{{i.product.product_name}}
+					  </p>
+					 
+					  <p style="color: red;font-size: 20px;">Price : <a class="btn btn-primary" href="#">{{i.price}}</a></p>
+					  
+					  	<form method="post" action="{% url 'change_qty' %}">
+					  		{% csrf_token %}
+					  		<p style="color: red;font-size: 20px;">Quantity : 
+					  		<a class="btn btn-primary" href="#">
+					  			<input type="hidden" name="cid" value="{{i.pk}}">
+					  			<input type="number" name="qty" value="{{i.qty}}" min="1" max="10" onchange="this.form.submit();">
+					  		</a>
+					  	</p>
+					  	</form>
+					  
+					  <p style="color: red;font-size: 20px;">Total Price : <a class="btn btn-primary" href="#">{{i.total_price}}</a></p>
+					</div>
+				  </div>
+				</li>
+				{% endfor %}
+			  </ul>
+			  <p style="color: red;font-size: 20px;">
+			  	<form name="checkout" method="post" action="{% url 'pay' %}">
+			  		{% csrf_token %}
+			  		Net Price To Pay : {{net_price}}
+			  		<input type="hidden" name="amount" value="{{net_price}}">
+			  		<input type="submit" value="Checkout"  class="btn btn-primary">
+			  </form>
+			</p>
+			{% else %}
+				<center><h1>No Items In Cart</h1></center>
+			{% endif %}
+		</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
+{% endblock %}

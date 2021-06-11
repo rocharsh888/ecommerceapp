@@ -1,0 +1,56 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  </head>
+<body>
+
+<div id="mainBody">
+	<div class="container">
+		<div class="row">		
+			<h4>Product Detail </h4>
+			  	<ul class="thumbnails">
+			  		
+						<li class="span3">
+				  			<div class="thumbnail">
+								<img src="{{product.product_image.url}}" style="width: 170px;height:250px;" alt=""/>
+								<div class="caption">
+					  				<h5>Product name</h5>
+					  				<p> 
+										{{product.product_name}} 
+					  				</p>
+					  				<p> 
+										{{product.product_model}} 
+					  				</p>
+					  				<p> 
+										{{product.product_desc}} 
+					  				</p>
+					 
+					  				<h4 style="text-align:center">
+					  					
+					  					<a class="btn btn-primary" href="#">
+					  						Rs. {{product.product_price}}
+					  					</a>
+					  				</h4>
+					  				<h4 style="text-align:center">
+					  					
+					  					<a href="{% url 'seller_edit_product' pk=product.pk %}">
+					  						<input type="button" value="Edit" class="btn btn-primary">
+					  					</a>
+					  					<a href="{% url 'seller_delete_product' pk=product.pk %}">
+					  						<input type="button" value="Delete" class="btn btn-primary">
+					  					</a>
+					  				</h4>
+								</div>
+				  			</div>
+						</li>
+				
+			  </ul>	
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+{% endblock %}

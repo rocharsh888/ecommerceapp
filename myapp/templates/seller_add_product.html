@@ -1,0 +1,98 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li class="active">Add Product</li>
+
+    </ul>
+	<h3> Product</h3>
+	
+	<h4>
+		{% if msg %}
+			{{msg}}
+		{% endif %}
+	</h4>
+	<div class="well">
+	
+	<form class="form-horizontal" method="post" action="{% url 'seller_add_product' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		<h4>Product information</h4>
+		<div class="control-group">
+		<label class="control-label">Product Category <sup>*</sup></label>
+		<div class="controls">
+		<select class="span1" name="product_category">
+			<option value="">-</option>
+			<option value="camera">Camera</option>
+			<option value="mobile">Mobile</option>
+			<option value="pendrive">PenDrive</option>
+			
+		</select>
+		</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label" for="inputFname1">Product name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputFname1" placeholder="Product Name" name="product_name">
+			</div>
+		 </div>
+		 <div class="control-group">
+			<label class="control-label" for="inputLnam">Product Model <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputLnam" placeholder="Product Model" name="product_model">
+			</div>
+		 </div>
+		<div class="control-group">
+		<label class="control-label" for="input_email">Product Price <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" id="input_email" placeholder="Product Price" name="product_price">
+		</div>
+	  </div>	  
+
+		<h4>Product Description</h4>
+		
+		<div class="control-group">
+			<label class="control-label" for="address">Product Description<sup>*</sup></label>
+			<div class="controls">
+			  <textarea rows="5" cols="22" name="product_desc"></textarea>
+			</div>
+		</div>		
+		
+
+		<div class="control-group">
+			<label class="control-label" for="mobile">Product Image </label>
+			<div class="controls">
+			  <input type="file"  name="product_image" id="mobile" placeholder="Product Image"/> 
+			</div>
+		</div>
+		
+	
+	
+	<div class="control-group">
+			<div class="controls">
+				
+				<input class="btn btn-large btn-success" type="submit" value="Add Product" />
+			</div>
+		</div>		
+	</form>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<!-- MainBody End ============================= -->
+</body>
+</html>
+{% endblock %}

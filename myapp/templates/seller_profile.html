@@ -1,0 +1,130 @@
+{% extends 'seller_header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+<!-- Sidebar ================================================== -->
+	
+<!-- Sidebar end=============================================== -->
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li class="active">Profile</li>
+
+    </ul>
+	<h3> Profile</h3>
+	
+	<h4>
+		{% if msg %}
+			{{msg}}
+		{% endif %}
+	</h4>
+	<div class="well">
+	
+	<form class="form-horizontal" method="post" action="{% url 'seller_profile' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		<h4>Edit Your personal information</h4>
+		<div class="control-group">
+		<label class="control-label">Title <sup>*</sup></label>
+		<div class="controls">
+		<select class="span1" name="title">
+			<option value="">-</option>
+			{% if user.title ==  "Mr." %}
+				<option value="Mr." selected="selected">Mr.</option>
+				<option value="Mrs.">Mrs</option>
+				<option value="Miss">Miss</option>
+			{% elif user.title ==  "Mrs" %}
+				<option value="Mr.">Mr.</option>
+				<option value="Mrs." selected="selected">Mrs</option>
+				<option value="Miss">Miss</option>
+			{% elif user.title ==  "Miss" %}
+				<option value="Mr.">Mr.</option>
+				<option value="Mrs.">Mrs</option>
+				<option value="Miss" selected="selected">Miss</option>
+			{% else %}
+				<option value="Mr.">Mr.</option>
+				<option value="Mrs.">Mrs</option>
+				<option value="Miss">Miss</option>
+			{% endif %}
+		</select>
+		</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="inputFname1">First name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputFname1" placeholder="First Name" name="fname" value="{{user.fname}}">
+			</div>
+		 </div>
+		 <div class="control-group">
+			<label class="control-label" for="inputLnam">Last name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputLnam" placeholder="Last Name" name="lname" value="{{user.lname}}">
+			</div>
+		 </div>
+		<div class="control-group">
+		<label class="control-label" for="input_email">Email <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" id="input_email" placeholder="Email" name="email" value="{{user.email}}">
+		</div>
+	  </div>	  
+	
+
+		<div class="control-group">
+		<label class="control-label">Date of Birth <sup>*</sup></label>
+		<div class="controls">
+		<input type="date" id="inputFname1" placeholder="Birth Date" name="dob"  value="{{user.dob}}">
+	</div>
+	  </div>
+
+		<h4>Your address</h4>
+		
+		<div class="control-group">
+			<label class="control-label" for="address">Address<sup>*</sup></label>
+			<div class="controls">
+			  <textarea rows="5" cols="22" name="address">{{user.address}}</textarea>
+			</div>
+		</div>		
+		<div class="control-group">
+			<label class="control-label" for="mobile">Mobile Phone </label>
+			<div class="controls">
+			  <input type="text"  name="mobile" id="mobile" placeholder="Mobile Phone" value="{{user.mobile}}"/> 
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="mobile">Current Image </label>
+			<div class="controls">
+			  <img src="{{user.image.url}}" width="100px" height="100px">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="mobile">Image </label>
+			<div class="controls">
+			  <input type="file"  name="image" id="mobile" placeholder="User Image"/> 
+			</div>
+		</div>
+		
+	
+	
+	<div class="control-group">
+			<div class="controls">
+				
+				<input class="btn btn-large btn-success" type="submit" value="Update Profile" />
+			</div>
+		</div>		
+	</form>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+<!-- MainBody End ============================= -->
+</body>
+</html>
+{% endblock %}

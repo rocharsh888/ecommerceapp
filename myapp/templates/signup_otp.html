@@ -1,0 +1,57 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+<body>
+<div id="mainBody">
+	<div class="container">
+	<div class="row">
+
+	<div class="span9">
+    <ul class="breadcrumb">
+		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li class="active">Verify OTP</li>
+    </ul>
+	<h3> Verify OTP</h3>	
+	<hr class="soft"/>
+	
+	<div class="row">
+		<div class="span9" style="min-height:900px">
+			<div class="well">
+			<h5>Enter OTP</h5><br/>
+			<h5>
+				
+				{% if msg %}
+					{{msg}}
+				{% endif %}
+				
+			</h5><br/>
+			<form method="post" action="{% url 'signup_verify_otp' %}">
+				{% csrf_token %}
+				<input type="hidden" name="otp1" value="{{otp}}">
+				<input type="hidden" name="email" value="{{email}}">
+			  <div class="control-group">
+				<label class="control-label" for="inputEmail1">Enter OTP</label>
+				<div class="controls">
+				  <input class="span3"  type="password" id="inputEmail1" placeholder="OTP" name="otp2">
+				</div>
+			  </div>
+			  <div class="controls">
+			  <button type="submit" class="btn block">Verify</button>
+			  </div>
+			</form>
+		</div>
+		</div>
+	</div>	
+	
+</div>
+</div>
+</div>
+</div>
+<!-- MainBody End ============================= -->
+</body>
+</html>
+{% endblock %}
